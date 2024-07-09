@@ -1,0 +1,58 @@
+services:
+  backend:
+    restart: always
+    container_name: backend
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    image: backend
+    ports:
+    # мапит внешний 4000 порт на внутренний 5000 (заданный в .env порт для бекенда по умолчанию)
+      - "4000:5000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - internal_network
+
+  frontend:
+    container_name: frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    image: frontend
+    ports:
+      - "8081:80"
+    env_file:
+      - .env
+    networks:
+      - external_network
+
+  postgres:
+    restart: always
+    container_name: postgres
+    image: postgres
+    volumes:
+      # - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/data/postgres
+    env_file:
+      - .env
+    networks:
+      - internal_network
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8082:8080
+    networks:
+      - internal_network
+  
+volumes:
+  postgres_data:
+
+networks:
+  external_network:
+  internal_network:

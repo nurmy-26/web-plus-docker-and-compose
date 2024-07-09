@@ -1,6 +1,6 @@
 // export const URL = "http://167.235.140.175:3001";
-// export const URL = "http://localhost:5000";
-export const URL = "http://api.nurmy-app.nomorepartiesco.ru";
+export const URL = "http://localhost:4000"; // для проверки локально
+// export const URL = "http://api.nurmy-app.nomorepartiesco.ru";
 
 export const MINIMUM_PASSWORD_LENGTH = 3;
 export const MINIMUM_USERNAME_LENGTH = 3;
