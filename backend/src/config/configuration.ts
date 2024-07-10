@@ -4,8 +4,10 @@ export default () => ({
   app: {
     port: parseInt(process.env.PORT, 10) || ENV_EXAMPLE.PORT,
     autoLoadEntities: true,
-    synchronize: process.env.NODE_ENV === 'development' ? true : false,
+    // без true не создастся БД (либо для прода нужно описать миграцию):
+    synchronize: true,
     // синхронизация БД с кодом только в dev режиме
+    // synchronize: process.env.NODE_ENV === 'development' ? true : false,
   },
   db: {
     host: process.env.POSTGRES_HOST || ENV_EXAMPLE.POSTGRES_HOST,
